@@ -1,58 +1,13 @@
 inputs:
-  python-version:
-    required: true
-  default_region:
-    required: true
   access_key_id:
     required: true
   secret_access_key:
     required: true
   ref_name:
     required: true
+  default_region:
+    required: true
 
-# runs:
-#   using: "composite"
-#   steps:
-#   - uses: actions/checkout@v4
-#     name: Checkout
-#   - uses: actions/setup-python@v4
-#     with:
-#       python-version: '3.10'
-  # - name: Set AWS profile
-  #   run: |
-  #     cd $GITHUB_WORKSPACE/.
-  #     mkdir -p ~/.aws
-  #     echo "[sportwig]" > ~/.aws/config
-  #     echo "region=${{ env.AWS_DEFAULT_REGION }}" >> ~/.aws/config
-  #     echo "[sportwig]" > ~/.aws/credentials
-  #     echo "aws_access_key_id=${{ env.AWS_ACCESS_KEY_ID }}" >> ~/.aws/credentials
-  #     echo "aws_secret_access_key=${{ env.AWS_SECRET_ACCESS_KEY }}" >> ~/.aws/credentials
-  #   shell: bash
-  # - name: Set virtualenv
-  #   run: |
-  #     python -m pip install virtualenv
-  #     virtualenv .venv
-  #     source ./.venv/bin/activate
-  #   shell: bash
-  # - name: Install Python dependencies
-  #   run: |
-  #     python -m pip install pip -U
-  #     python -m pip install -r requirements/deploy.txt
-  #   shell: bash
-  # - name: Deploy
-  #   run: |
-  #     {
-  #       # Check status (whether to update or deploy)
-  #       zappa status ${{ github.ref_name }}
-  #       # Update environment
-  #       echo "Starting update..."
-  #       zappa update ${{ github.ref_name }}
-  #     } || {
-  #       # Deploy environment
-  #       echo "Starting deployment..."
-  #       zappa deploy ${{ github.ref_name }}
-  #     }
-    # shell: bash
 runs:
   using: docker
   image: Dockerfile
@@ -61,8 +16,3 @@ runs:
     - ${{ inputs.access_key_id }}
     - ${{ inputs.secret_access_key }}
     - ${{ inputs.ref_name }}
-      # - name: Setting up machine and deploy
-      #   run: |
-      #     chmod -x dist/deploy.sh
-      #     ./dist/deploy.sh
-      #   shell: bash
