@@ -1,6 +1,14 @@
 inputs:
   python-version:
     required: true
+  default_region:
+    required: true
+  access_key_id:
+    required: true
+  secret_access_key:
+    required: true
+  ref_name:
+    required: true
 
 # runs:
 #   using: "composite"
@@ -49,10 +57,10 @@ runs:
   using: docker
   image: Dockerfile
   args:
-    - ${{ env.AWS_DEFAULT_REGION }}
-    - ${{ env.AWS_ACCESS_KEY_ID }}
-    - ${{ env.AWS_SECRET_ACCESS_KEY }}
-    - ${{ github.ref_name }}
+    - ${{ inputs.default_region }}
+    - ${{ inputs.access_key_id }}
+    - ${{ inputs.secret_access_key }}
+    - ${{ inputs.ref_name }}
       # - name: Setting up machine and deploy
       #   run: |
       #     chmod -x dist/deploy.sh
