@@ -2,14 +2,14 @@ inputs:
   python-version:
     required: true
 
-runs:
-  using: "composite"
-  steps:
-  - uses: actions/checkout@v4
-    name: Checkout
-  - uses: actions/setup-python@v4
-    with:
-      python-version: '3.10'
+# runs:
+#   using: "composite"
+#   steps:
+#   - uses: actions/checkout@v4
+#     name: Checkout
+#   - uses: actions/setup-python@v4
+#     with:
+#       python-version: '3.10'
   # - name: Set AWS profile
   #   run: |
   #     cd $GITHUB_WORKSPACE/.
@@ -45,8 +45,16 @@ runs:
   #       zappa deploy ${{ github.ref_name }}
   #     }
     # shell: bash
-  - name: Setting up machine and deploy
-    run: |
-      chmod -x dist/deploy.sh
-      ./dist/deploy.sh ${{ env.AWS_DEFAULT_REGION }} ${{ env.AWS_ACCESS_KEY_ID }} ${{ env.AWS_SECRET_ACCESS_KEY }} ${{ github.ref_name }}
-    shell: bash
+runs:
+  using: docker
+  image: Dockerfile
+  args:
+    - ${{ env.AWS_DEFAULT_REGION }}
+    - ${{ env.AWS_ACCESS_KEY_ID }}
+    - ${{ env.AWS_SECRET_ACCESS_KEY }}
+    - ${{ github.ref_name }}
+      # - name: Setting up machine and deploy
+      #   run: |
+      #     chmod -x dist/deploy.sh
+      #     ./dist/deploy.sh
+      #   shell: bash
