@@ -31,7 +31,7 @@ runs:
   #     python -m pip install pip -U
   #     python -m pip install -r requirements/deploy.txt
   #   shell: bash
-  - name: Deploy
+  # - name: Deploy
   #   run: |
   #     {
   #       # Check status (whether to update or deploy)
@@ -49,4 +49,9 @@ runs:
     run: |
       chmod -x dist/deploy.sh
       ./dist/deploy.sh
+    args:
+      - ${{ env.AWS_DEFAULT_REGION }}
+      - ${{ env.AWS_ACCESS_KEY_ID }}
+      - ${{ env.AWS_SECRET_ACCESS_KEY }}
+      - ${{ github.ref_name }}
     shell: bash
