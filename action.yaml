@@ -24,28 +24,27 @@ runs:
   #     AWS_ACCESS_KEY_ID: ${{ env.AWS_ACCESS_KEY_ID }}
   #     AWS_SECRET_ACCESS_KEY: ${{ env.AWS_SECRET_ACCESS_KEY }}
   #     AWS_DEFAULT_REGION: ${{ env.AWS_DEFAULT_REGION }}
-    - name: Set AWS profile
-      run: |
-        cd $GITHUB_WORKSPACE/.
-        mkdir -p ~/.aws
-        echo "[sportwig]" > ~/.aws/config
-        echo "region=${{ env.AWS_DEFAULT_REGION }}" >> ~/.aws/config
-
-        echo "[sportwig]" > ~/.aws/credentials
-        echo "aws_access_key_id=${{ env.AWS_ACCESS_KEY_ID }}" >> ~/.aws/credentials
-        echo "aws_secret_access_key=${{ env.AWS_SECRET_ACCESS_KEY }}" >> ~/.aws/credentials
-      shell: bash
-    - name: Deploy
-      run: |
-        {
-          # Check status (whether to update or deploy)
-          zappa status ${{ github.ref_name }}
-          # Update environment
-          echo "Starting update..."
-          zappa update ${{ github.ref_name }}
-        } || {
-          # Deploy environment
-          echo "Starting deployment..."
-          zappa deploy ${{ github.ref_name }}
-        }
-      shell: bash
+  - name: Set AWS profile
+    run: |
+      cd $GITHUB_WORKSPACE/.
+      mkdir -p ~/.aws
+      echo "[sportwig]" > ~/.aws/config
+      echo "region=${{ env.AWS_DEFAULT_REGION }}" >> ~/.aws/config
+      echo "[sportwig]" > ~/.aws/credentials
+      echo "aws_access_key_id=${{ env.AWS_ACCESS_KEY_ID }}" >> ~/.aws/credentials
+      echo "aws_secret_access_key=${{ env.AWS_SECRET_ACCESS_KEY }}" >> ~/.aws/credentials
+    shell: bash
+  - name: Deploy
+    run: |
+      {
+        # Check status (whether to update or deploy)
+        zappa status ${{ github.ref_name }}
+        # Update environment
+        echo "Starting update..."
+        zappa update ${{ github.ref_name }}
+      } || {
+        # Deploy environment
+        echo "Starting deployment..."
+        zappa deploy ${{ github.ref_name }}
+      }
+    shell: bash
