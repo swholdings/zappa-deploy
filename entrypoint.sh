@@ -22,3 +22,5 @@ python -m pip install -r requirements/deploy.txt
   echo "Starting deployment..."
   zappa deploy $4
 }
+
+zappa manage $4 migrate
