@@ -1,3 +1,0 @@
--r requirements.txt
-
-zappa==0.57.0
