@@ -10,7 +10,7 @@ inputs:
 
 runs:
   using: docker
-  image: DockerfileSW
+  image: ./DockerfileSW
   args:
     - ${{ inputs.default_region }}
     - ${{ inputs.access_key_id }}
