@@ -5,6 +5,6 @@ RUN apt install -y python3 python3-pip
 
 RUN pip3 install virtualenv
 
-ADD entrypoint.sh /entrypoint.sh
+COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
