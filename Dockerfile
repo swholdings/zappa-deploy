@@ -1,7 +1,7 @@
 FROM ubuntu:latest
 
 RUN apt update && apt upgrade -y
-RUN apt install python3 python3-pip
+RUN apt install -y python3 python3-pip
 
 RUN pip3 install virtualenv
 
