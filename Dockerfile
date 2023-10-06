@@ -1,6 +1,8 @@
-FROM amazon/aws-cli:latest
+FROM ubuntu:latest
 
-RUN yum install python3 python3-pip -y
+RUN apt update && apt upgrade -y
+RUN apt install python3 python3-pip
+
 RUN pip3 install virtualenv
 
 ADD entrypoint.sh /entrypoint.sh
