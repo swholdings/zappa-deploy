@@ -24,3 +24,4 @@ python -m pip install -r requirements/deploy.txt
 }
 
 zappa manage $4 migrate
+zappa manage $4 collectstatic --no-input
