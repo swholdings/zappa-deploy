@@ -15,15 +15,13 @@ source ./.venv/bin/activate
 python -m pip install -r requirements/deploy.txt
 
 {
-  echo "Migrate"
-  zappa manage $4 migrate
-  # zappa status $4
+  zappa status $4
   echo "Starting update"
   zappa update $4
 } || {
   echo "Starting deployment"
   zappa deploy $4
-  zappa manage $4 migrate
 }
 
+zappa manage $4 migrate
 zappa manage $4 collectstatic_to_s3
